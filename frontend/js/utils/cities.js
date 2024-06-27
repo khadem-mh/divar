@@ -4,6 +4,12 @@ const fetchCities = async () => {
     return cities
 }
 
+
+const setCityCookie = city => {
+    document.cookie = `city=${city}; path=/`
+}
+
 export {
-    fetchCities
+    fetchCities,
+    setCityCookie
 }

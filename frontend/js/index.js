@@ -1,9 +1,18 @@
-import { fetchCities } from "./utils/cities.js"
+import { fetchCities, setCityCookie } from "./utils/cities.js"
 
 //var
 const $ = document
 const citiesRandomList = $.querySelector('.main__cities-list .row')
 const fragmentCities = $.createDocumentFragment()
+
+
+//! Funcs Helper
+
+const cityClickHandler = (event, city) => {
+    event.preventDefault()
+    setCityCookie(city)
+    window.location.href = `${window.location.origin}/frontend/pages/main.html?city=${city}`
+}
 
 const showPopularCities = cities => {
     citiesRandomList.innerHTML = ''
@@ -12,7 +21,7 @@ const showPopularCities = cities => {
         divElem.className = 'col-2 d-flex justify-content-center'
         divElem.innerHTML = `  
             <li class="main__cities-item">
-                <a class="main__cities-link" href="${city.href}">${city.name}</a>
+                <a class="main__cities-link" href="#" onclick="cityClickHandler(event, '${city.href}')">${city.name}</a>
             </li>
         `
         fragmentCities.appendChild(divElem)
@@ -21,6 +30,14 @@ const showPopularCities = cities => {
     citiesRandomList.appendChild(fragmentCities)
 
 }
+
+
+//! Binding
+
+window.cityClickHandler = cityClickHandler
+
+
+// EventListener
 
 window.addEventListener('load', async () => {
     const cities = await fetchCities()

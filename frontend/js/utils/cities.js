@@ -4,12 +4,23 @@ const fetchCities = async () => {
     return cities
 }
 
-
 const setCityCookie = city => {
     document.cookie = `city=${city}; path=/`
 }
 
+const getCityCookie = () => {
+    if (document.cookie) {
+        let cookiesArr = document.cookie.split('; ')
+        let cookieFilter = cookiesArr.filter(cookie => cookie.includes('city'))
+        if (cookieFilter.length) {
+            let cityNmae = cookieFilter[0].slice(cookieFilter[0].search('=') + 1)
+            return cityNmae
+        }
+    }
+}
+
 export {
     fetchCities,
-    setCityCookie
+    setCityCookie,
+    getCityCookie
 }

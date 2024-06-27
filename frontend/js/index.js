@@ -1,4 +1,4 @@
-import { fetchCities, setCityCookie } from "./utils/cities.js"
+import { fetchCities, setCityCookie, getCityCookie } from "./utils/cities.js"
 
 //var
 const $ = document
@@ -43,4 +43,8 @@ window.addEventListener('load', async () => {
     const cities = await fetchCities()
     const chooseRandomCity = cities.sort(() => .5 - Math.random()).slice(0, 12)
     showPopularCities(chooseRandomCity)
+    let cityNmae = getCityCookie()
+    if (cityNmae.length) {
+        window.location.href = `${window.location.origin}/frontend/pages/main.html?city=${cityNmae}`
+    }
 })

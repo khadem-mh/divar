@@ -1,13 +1,13 @@
-import { fetchCitiesPopular, setCityCookie, getCityCookie } from "./utils/cities.js"
+import { fetchCitiesPopular, setCityCookie, getCityCookie, fetchCities } from "./utils/cities.js"
 
 //var
 const $ = document
-const citiesRandomList = $.querySelector('.main__cities-list .row')
+const citiesPopularList = $.querySelector('.main__cities-list .row')
+const citySearchInput = $.querySelector('.main__input')
 const fragmentCities = $.createDocumentFragment()
 
 
 //! Funcs Helper
-
 const cityClickHandler = (event, city) => {
     event.preventDefault()
     setCityCookie(city)
@@ -15,7 +15,7 @@ const cityClickHandler = (event, city) => {
 }
 
 const showPopularCities = cities => {
-    citiesRandomList.innerHTML = ''
+    citiesPopularList.innerHTML = ''
     cities.map(city => {
         const divElem = $.createElement('div')
         divElem.className = 'col-2 d-flex justify-content-center'
@@ -26,21 +26,25 @@ const showPopularCities = cities => {
         `
         fragmentCities.appendChild(divElem)
     })
-    console.log(citiesRandomList);
-    citiesRandomList.appendChild(fragmentCities)
+    citiesPopularList.appendChild(fragmentCities)
+}
 
+
+//! Functions Rendering DOM
+const citySearchHandler = value => {
+    console.log(value);
 }
 
 
 //! Binding
-
 window.cityClickHandler = cityClickHandler
 
 
-// EventListener
-
+//! EventListener
+window.addEventListener('keyup', event => citySearchHandler(event.target.value))
 window.addEventListener('load', async () => {
     const citiesPopular = await fetchCitiesPopular()
+    const cities = await fetchCities()
     showPopularCities(citiesPopular)
     let cityNmae = getCityCookie()
     if (cityNmae.length) {

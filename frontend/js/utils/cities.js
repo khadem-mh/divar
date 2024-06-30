@@ -1,5 +1,5 @@
-const fetchCities = async () => {
-    const res = await fetch('http://localhost:4000/api/cities')
+const fetchCitiesPopular = async () => {
+    const res = await fetch('http://localhost:4000/api/cities/popular')
     const cities = await res.json()
     return cities
 }
@@ -20,7 +20,7 @@ const getCityCookie = () => {
 }
 
 export {
-    fetchCities,
+    fetchCitiesPopular,
     setCityCookie,
     getCityCookie
 }

@@ -33,8 +33,8 @@ const showPopularCities = cities => {
 
 //! Functions Rendering DOM
 const citySearchHandler = value => {
-    let citiesFilter = [...cities].filter(city => city.name.includes(value))
-    if (value && citiesFilter.length) {
+    if (value) {
+        let citiesFilter = [...cities].filter(city => city.name.startsWith(value))
         citiesSearchResult.className = 'search-result-cities active'
         citiesSearchResult.innerHTML = ''
         console.log(citiesFilter);

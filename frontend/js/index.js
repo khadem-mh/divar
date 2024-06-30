@@ -33,17 +33,19 @@ const showPopularCities = cities => {
 
 //! Functions Rendering DOM
 const citySearchHandler = value => {
+    let citiesFilter = null
     if (value) {
-        let citiesFilter = [...cities].filter(city => city.name.startsWith(value))
         citiesSearchResult.className = 'search-result-cities active'
+        citiesFilter = [...cities].filter(city => city.name.startsWith(value))
+        console.log('cityFilter =>>', citiesFilter);
         citiesSearchResult.innerHTML = ''
-        console.log(citiesFilter);
         citiesFilter.forEach(city => {
             citiesSearchResult.insertAdjacentHTML('beforeend', `<li>${city.name}</li>`)
         })
-    } else {
-        citiesSearchResult.className = 'search-result-cities'
+        citiesFilter = ''
     }
+    else citiesSearchResult.className = 'search-result-cities'
+
 }
 
 

@@ -1,11 +1,12 @@
 import { fetchCitiesPopular, setCityCookie, getCityCookie, fetchCities } from "./utils/cities.js"
 
-//var
+// var dom
 const $ = document
 const citiesPopularList = $.querySelector('.main__cities-list .row')
 const citySearchInput = $.querySelector('.main__input')
+const citiesSearchResult = $.querySelector('.search-result-cities')
 const fragmentCities = $.createDocumentFragment()
-
+let cities = null
 
 //! Funcs Helper
 const cityClickHandler = (event, city) => {
@@ -32,7 +33,14 @@ const showPopularCities = cities => {
 
 //! Functions Rendering DOM
 const citySearchHandler = value => {
-    console.log(value);
+
+    let citiesFilter = [...cities].filter(city => city.startWith(value))
+    console.log(citiesFilter);
+    if (value) {
+        citiesSearchResult.className = 'search-result-cities active'
+    } else {
+        citiesSearchResult.className = 'search-result-cities'
+    }
 }
 
 
@@ -44,10 +52,8 @@ window.cityClickHandler = cityClickHandler
 window.addEventListener('keyup', event => citySearchHandler(event.target.value))
 window.addEventListener('load', async () => {
     const citiesPopular = await fetchCitiesPopular()
-    const cities = await fetchCities()
     showPopularCities(citiesPopular)
+    cities = await fetchCities()
     let cityNmae = getCityCookie()
-    if (cityNmae.length) {
-        window.location.href = `${window.location.origin}/frontend/pages/main.html?city=${cityNmae}`
-    }
+    cityNmae !== undefined && (window.location.href = `${window.location.origin}/frontend/pages/main.html?city=${cityNmae}`)
 })

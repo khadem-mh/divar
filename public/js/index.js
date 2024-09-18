@@ -2,8 +2,13 @@ import { getAllCities, selectElem, insertElemToDom } from "../../utils/shared.js
 
 window.addEventListener('load', () => {
 
+    const loadingContainer = selectElem('#loading-container')
+
     getAllCities()
         .then(res => {
+
+            loadingContainer.style.display = 'none'
+
             const popularCitiesContainer = selectElem("#popular-cities")
 
             const popularCities = res.data.cities.filter(city => city.popular)

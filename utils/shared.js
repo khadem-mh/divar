@@ -8,4 +8,4 @@ export const getAllCities = async () => {
 
 export const selectElem = param => document.querySelector(param)
 
-export const insertElemInDom = (parent, elem) => parent.insertAdjacentHTML("beforeend", elem)
+export const insertElemToDom = (parent, elem) => parent.insertAdjacentHTML("beforeend", elem)

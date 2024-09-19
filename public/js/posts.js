@@ -1,5 +1,5 @@
 import { getCityAdvertisments, getAdvertismentsCategories } from "../../utils/shared.js"
-import { getCityInStorage, hiddenLoading, selectElem, insertElemToDom, baseURL, addParamToURL } from "../../utils/utils.js";
+import { getCityInStorage, hiddenLoading, selectElem, insertElemToDom, baseURL, addParamToURL, calculateRelativeTimeDifference } from "../../utils/utils.js";
 
 window.addEventListener('load', () => {
 
@@ -9,7 +9,7 @@ window.addEventListener('load', () => {
 
         //Hidden Loading
         hiddenLoading()
-
+        
         generateAdvertisment(res.data.posts)
 
     })
@@ -21,6 +21,8 @@ window.addEventListener('load', () => {
         if (posts.length) {
 
             posts.forEach(post => {
+
+                const date = calculateRelativeTimeDifference(post.createdAt)
 
                 insertElemToDom(
                     postsContainer,
@@ -36,7 +38,7 @@ window.addEventListener('load', () => {
                             <span class="product-card__price">
                               ${post.price === 0 ? "توافقی" : post.price.toLocaleString() + " تومان"}
                             </span>
-                            <span class="product-card__time">Date</span>
+                            <span class="product-card__time">${date}</span>
                           </div>
                         </div>
                         <div class="product-card__left">

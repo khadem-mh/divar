@@ -12,6 +12,21 @@ export const addParamToURL = (param, value) => window.history.pushState(null, ''
 
 export const hiddenLoading = () => { selectElem('#loading-container').style.display = 'none' }
 
+export const calculateRelativeTimeDifference = createdAt => {
+
+    const hour = 60 * 60 * 1000 // MS
+    //date
+    const currentTime = new Date()
+    const createdTime = new Date(createdAt)
+    //calculate
+    const timeDifference = currentTime - createdTime
+    const pastHours = Math.floor(timeDifference / hour)
+    const pastDays = Math.floor(pastHours / 24)
+
+    if (pastHours > 24) return `${pastDays} روز گذشته`
+    return `${pastHours} ساعت پیش`
+
+}
 
 //? Vars
 

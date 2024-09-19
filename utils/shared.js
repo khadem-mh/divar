@@ -15,7 +15,7 @@ export const getSocialsAndShow = async () => {
 
     const res = await fetch(`${baseURLApi}social`)
     const { data } = await res.json()
-    
+
     data.socials.forEach(social => {
 
         insertElemToDom(
@@ -29,4 +29,12 @@ export const getSocialsAndShow = async () => {
 
     })
 
+}
+
+// Get City Advertisment
+export const getCityAdvertisments = async citiesIDs => {
+
+    const res = await fetch(`${baseURLApi}post/?city=${citiesIDs}`)
+    return await res.json()
+    
 }

@@ -1,9 +1,7 @@
 import { getAllCities } from "../../utils/shared.js"
-import { selectElem, insertElemToDom, setCityInStorage } from "../../utils/utils.js"
+import { selectElem, insertElemToDom, setCityInStorage, hiddenLoading } from "../../utils/utils.js"
 
 window.addEventListener('load', () => {
-
-    const loadingContainer = selectElem('#loading-container')
 
     getAllCities()
         .then(res => {
@@ -14,7 +12,7 @@ window.addEventListener('load', () => {
             const cities = res.data.cities
 
             //Hidden Loading
-            loadingContainer.style.display = 'none'
+            hiddenLoading()
 
             //Handle Logic Searching
             searchInput.addEventListener('keyup', event => {

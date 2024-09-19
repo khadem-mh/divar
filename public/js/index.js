@@ -1,4 +1,5 @@
-import { getAllCities, selectElem, insertElemToDom } from "../../utils/shared.js"
+import { getAllCities } from "../../utils/shared.js"
+import { selectElem, insertElemToDom, setCityInStorage } from "../../utils/utils.js"
 
 window.addEventListener('load', () => {
 
@@ -48,7 +49,6 @@ window.addEventListener('load', () => {
                 } else
                     searchResult.classList.remove("active")
 
-
             })
 
             //Show Popular Cities
@@ -59,13 +59,18 @@ window.addEventListener('load', () => {
                 insertElemToDom(
                     popularCitiesContainer,
                     `
-                        <li class="main__cities-item">
+                        <li class="main__cities-item" onclick="cityClickHandler('${city.name}', '${city.id}')">
                             <a class="main__cities-link" href="#">${city.name}</a>
                         </li>
                     `
                 )
 
             })
+
+            window.cityClickHandler = (cityName, cityID) => {
+                location.href = "/pages/posts.html"
+                setCityInStorage("city", { name: cityName, id: cityID })
+            }
 
         })
 

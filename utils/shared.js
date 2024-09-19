@@ -1,12 +1,4 @@
-//? Helper Functions For Best Performance
-
-export const baseURLApi = "https://divarapi.liara.run/v1/"
-
-export const selectElem = param => document.querySelector(param)
-
-export const insertElemToDom = (parent, elem) => parent.insertAdjacentHTML("beforeend", elem)
-
-
+import { baseURLApi, insertElemToDom, selectElem } from "./utils.js"
 
 //? Functions for Handle Logic and Dynamic website
 

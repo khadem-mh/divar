@@ -14,3 +14,5 @@ export const hiddenLoading = () => { selectElem('#loading-container').style.disp
 //? Vars
 
 export const baseURLApi = "https://divarapi.liara.run/v1/"
+
+export const baseURL = "https://divarapi.liara.run/"

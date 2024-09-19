@@ -38,3 +38,11 @@ export const getCityAdvertisments = async citiesIDs => {
     return await res.json()
     
 }
+
+// Get Advertisment Category
+export const getAdvertismentsCategories = async () => {
+
+    const res = await fetch(`${baseURLApi}category`)
+    return await res.json()
+    
+}

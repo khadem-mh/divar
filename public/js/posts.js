@@ -1,5 +1,5 @@
 import { getCityAdvertisments, getAdvertismentsCategories } from "../../utils/shared.js"
-import { getCityInStorage, hiddenLoading, selectElem, insertElemToDom, baseURL } from "../../utils/utils.js";
+import { getCityInStorage, hiddenLoading, selectElem, insertElemToDom, baseURL, addParamToURL } from "../../utils/utils.js";
 
 window.addEventListener('load', () => {
 
@@ -55,6 +55,8 @@ window.addEventListener('load', () => {
 
     }
 
+    window.categoryClickHandler = categoryID => addParamToURL("categoryID", categoryID)
+
     getAdvertismentsCategories().then(res => {
 
         //Hidden Loading
@@ -69,7 +71,7 @@ window.addEventListener('load', () => {
                 categoriesContainer,
                 `
                     <div class="sidebar__category-link" id="category-${category._id}">
-                      <div class="sidebar__category-link_details">
+                      <div class="sidebar__category-link_details" onclick="categoryClickHandler('${category._id}')">
                         <i class="sidebar__category-icon bi bi-house"></i>
                         <p class="fw-bold">${category.title}</p>
                       </div>
@@ -80,6 +82,5 @@ window.addEventListener('load', () => {
         })
 
     })
-
 
 })

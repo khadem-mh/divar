@@ -8,6 +8,8 @@ export const setCityInStorage = (key, value) => { localStorage.setItem(key, JSON
 
 export const getCityInStorage = key => JSON.parse(localStorage.getItem(key))
 
+export const addParamToURL = (param, value) => window.history.pushState(null, '', `posts.html?${param}=${value}`)
+
 export const hiddenLoading = () => { selectElem('#loading-container').style.display = 'none' }
 
 

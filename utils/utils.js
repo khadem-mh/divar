@@ -8,4 +8,4 @@ export const insertElemToDom = (parent, elem) => parent.insertAdjacentHTML("befo
 
 export const setCityInStorage = (key, value) => { localStorage.setItem(key, JSON.stringify(value)) }
 
-export const getCityInStorage = key => localStorage.getItem(key)
+export const getCityInStorage = key => JSON.parse(localStorage.getItem(key))

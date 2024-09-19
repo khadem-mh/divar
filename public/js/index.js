@@ -69,7 +69,7 @@ window.addEventListener('load', () => {
 
             window.cityClickHandler = (cityName, cityID) => {
                 location.href = "/pages/posts.html"
-                setCityInStorage("city", { name: cityName, id: cityID })
+                setCityInStorage("cities", [{ name: cityName, id: cityID }])
             }
 
         })

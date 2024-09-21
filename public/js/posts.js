@@ -1,32 +1,32 @@
 import { getCityAdvertisments, getAdvertismentsCategories } from "../../utils/shared.js"
-import { getCityInStorage, hiddenLoading, selectElem, insertElemToDom, baseURL, addParamToURL, calculateRelativeTimeDifference } from "../../utils/utils.js";
+import { getCityInStorage, hiddenLoading, selectElem, insertElemToDom, baseURL, addParamToURL, calculateRelativeTimeDifference, getUrlParam } from "../../utils/utils.js";
 
 window.addEventListener('load', () => {
 
-    const cities = getCityInStorage('cities')
+  const cities = getCityInStorage('cities')
 
-    getCityAdvertisments(cities[0].id).then(res => {
+  getCityAdvertisments(cities[0].id).then(res => {
 
-        //Hidden Loading
-        hiddenLoading()
-        
-        generateAdvertisment(res.data.posts)
+    //Hidden Loading
+    hiddenLoading()
 
-    })
+    generateAdvertisment(res.data.posts)
 
-    const generateAdvertisment = posts => {
+  })
 
-        const postsContainer = selectElem("#posts-container")
+  const generateAdvertisment = posts => {
 
-        if (posts.length) {
+    const postsContainer = selectElem("#posts-container")
 
-            posts.forEach(post => {
+    if (posts.length) {
 
-                const date = calculateRelativeTimeDifference(post.createdAt)
+      posts.forEach(post => {
 
-                insertElemToDom(
-                    postsContainer,
-                    `
+        const date = calculateRelativeTimeDifference(post.createdAt)
+
+        insertElemToDom(
+          postsContainer,
+          `
                     <div class="col-4">
                       <a href="post.html/id=${post._id}" class="product-card">
                         <div class="product-card__right">
@@ -47,42 +47,60 @@ window.addEventListener('load', () => {
                       </a>
                     </div>
                   `
-                )
+        )
 
-            })
+      })
 
-        }
-        else
-            postsContainer.innerHTML = "<p class='empty'>آگهی یافت نشد</p>"
+    }
+    else
+      postsContainer.innerHTML = "<p class='empty'>آگهی یافت نشد</p>"
+
+  }
+
+  window.categoryClickHandler = categoryID => addParamToURL("categoryID", categoryID)
+
+  getAdvertismentsCategories().then(res => {
+
+    //Hidden Loading
+    hiddenLoading()
+
+    const categoryID = getUrlParam("categoryID")
+    const categories = res.data.categories
+    const categoriesContainer = selectElem("#categories-container");
+    categoriesContainer.innerHTML = ""
+
+    if (categoryID) {
+
+      const categoryInfos = categories.filter(category => category._id === categoryID)
+
+      if (!categoryInfos.length) {
+        
+      } else {
+        
+      }
+      
+
+    } else {
+
+      categories.forEach(category => {
+
+        insertElemToDom(
+          categoriesContainer,
+          `
+          <div class="sidebar__category-link" id="category-${category._id}">
+            <div class="sidebar__category-link_details" onclick="categoryClickHandler('${category._id}')">
+              <i class="sidebar__category-icon bi bi-house"></i>
+              <p class="fw-bold">${category.title}</p>
+            </div>
+          </div>
+          `
+        )
+
+      })
 
     }
 
-    window.categoryClickHandler = categoryID => addParamToURL("categoryID", categoryID)
 
-    getAdvertismentsCategories().then(res => {
-
-        //Hidden Loading
-        hiddenLoading()
-
-        const categoriesContainer = selectElem("#categories-container");
-        categoriesContainer.innerHTML = ""
-
-        res.data.categories.forEach(category => {
-
-            insertElemToDom(
-                categoriesContainer,
-                `
-                    <div class="sidebar__category-link" id="category-${category._id}">
-                      <div class="sidebar__category-link_details" onclick="categoryClickHandler('${category._id}')">
-                        <i class="sidebar__category-icon bi bi-house"></i>
-                        <p class="fw-bold">${category.title}</p>
-                      </div>
-                    </div>
-                `
-            )
-
-        })
-
-    })
+  })
 
 })

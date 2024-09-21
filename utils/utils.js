@@ -20,21 +20,6 @@ export const addParamToURL = (param, value) => {
 
 }
 
-export const getUrlParam = param => {
-    const urlParam = new URLSearchParams(location.search)
-    return urlParam.get(param)
-}
-
-export const removeParamFromUrl = param => {
-    //const url = new URL(location.href)
-    //url.searchParams.delete(param)
-    //window.history.replaceState(null, null, url)
-    history.back()
-    setTimeout(() => {
-        location.reload()
-    }, 1500)
-}
-
 export const hiddenLoading = () => { selectElem('#loading-container').style.display = 'none' }
 
 export const calculateRelativeTimeDifference = createdAt => {
@@ -51,6 +36,21 @@ export const calculateRelativeTimeDifference = createdAt => {
     if (pastHours > 24) return `${pastDays} روز گذشته`
     return `${pastHours} ساعت پیش`
 
+}
+
+export const getUrlParam = param => {
+    const urlParam = new URLSearchParams(location.search)
+    return urlParam.get(param)
+}
+
+export const removeParamFromUrl = param => {
+    //const url = new URL(location.href)
+    //url.searchParams.delete(param)
+    //window.history.replaceState(null, null, url)
+    history.back()
+    setTimeout(() => {
+        location.reload()
+    }, 1500)
 }
 
 //? Vars

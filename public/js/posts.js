@@ -1,18 +1,16 @@
 import { getCityAdvertisments, getAdvertismentsCategories } from "../../utils/shared.js"
-import { getCityInStorage, hiddenLoading, selectElem, insertElemToDom, baseURL, addParamToURL, calculateRelativeTimeDifference, getUrlParam } from "../../utils/utils.js";
+import { getCityInStorage, hiddenLoading, selectElem, insertElemToDom, baseURL, addParamToURL, calculateRelativeTimeDifference, getUrlParam, removeParamFromUrl } from "../../utils/utils.js";
 
 window.addEventListener('load', () => {
 
-  const cities = getCityInStorage('cities')
-
-  getCityAdvertisments(cities[0].id).then(res => {
-
-    //Hidden Loading
-    hiddenLoading()
-
-    generateAdvertisment(res.data.posts)
-
-  })
+  //! Helper Funcs
+  const createSubCategoryHtml = (subCategory) => {
+    return `
+      <li onclick="categoryClickHandler('${subCategory._id}')">
+        ${subCategory.title}
+      </li>
+    `
+  }
 
   const generateAdvertisment = posts => {
 
@@ -27,26 +25,26 @@ window.addEventListener('load', () => {
         insertElemToDom(
           postsContainer,
           `
-                    <div class="col-4">
-                      <a href="post.html/id=${post._id}" class="product-card">
-                        <div class="product-card__right">
-                          <div class="product-card__right-top">
-                            <p class="product-card__link">${post.title}</p>
-                          </div>
-                          <div class="product-card__right-bottom">
-                            <span class="product-card__condition">${post.dynamicFields[0].data}</span>
-                            <span class="product-card__price">
-                              ${post.price === 0 ? "توافقی" : post.price.toLocaleString() + " تومان"}
-                            </span>
-                            <span class="product-card__time">${date}</span>
-                          </div>
-                        </div>
-                        <div class="product-card__left">
-                        ${post.pics.length ? `<img class="product-card__img img-fluid" src="${baseURL}${post.pics[0].path}"/>` : `<img class="product-card__img img-fluid" src="/public/images/main/noPicture.PNG"/>`}
-                        </div>
-                      </a>
-                    </div>
-                  `
+          <div class="col-4">
+            <a href="post.html/id=${post._id}" class="product-card">
+              <div class="product-card__right">
+                <div class="product-card__right-top">
+                  <p class="product-card__link">${post.title}</p>
+                </div>
+                <div class="product-card__right-bottom">
+                  <span class="product-card__condition">${post.dynamicFields[0].data}</span>
+                  <span class="product-card__price">
+                    ${post.price === 0 ? "توافقی" : post.price.toLocaleString() + " تومان"}
+                  </span>
+                  <span class="product-card__time">${date}</span>
+                </div>
+              </div>
+              <div class="product-card__left">
+              ${post.pics.length ? `<img class="product-card__img img-fluid" src="${baseURL}${post.pics[0].path}"/>` : `<img class="product-card__img img-fluid" src="/public/images/main/noPicture.PNG"/>`}
+              </div>
+            </a>
+          </div>
+          `
         )
 
       })
@@ -57,7 +55,27 @@ window.addEventListener('load', () => {
 
   }
 
+  const findSubCategoryById = (categories, categoryID) => {
+
+    const allSubCategories = categories.flatMap(category => category.subCategories)
+    return allSubCategories.find(subCategory => subCategory._id === categoryID)
+
+  }
+
+  //! Event Listeners
   window.categoryClickHandler = categoryID => addParamToURL("categoryID", categoryID)
+  window.backToAllCategories = () => removeParamFromUrl("categoryID")
+
+  const cities = getCityInStorage('cities')
+
+  getCityAdvertisments(cities[0].id).then(res => {
+
+    //Hidden Loading
+    hiddenLoading()
+
+    generateAdvertisment(res.data.posts)
+
+  })
 
   getAdvertismentsCategories().then(res => {
 
@@ -74,16 +92,61 @@ window.addEventListener('load', () => {
       const categoryInfos = categories.filter(category => category._id === categoryID)
 
       if (!categoryInfos.length) {
-        
+
+        const subCategory = findSubCategoryById(categories, categoryID);
+
+        if (subCategory) {
+
+          insertElemToDom(
+            categoriesContainer,
+            `
+              <div class="all-categories" onclick="backToAllCategories()">
+                <p>همه اگهی ها</p>
+                <i class="bi bi-arrow-right"></i>
+              </div>
+              <div class="sidebar__category-link active-category" href="#" id="category-${subCategory._id}">
+                <div class="sidebar__category-link_details">
+                  <i class="sidebar__category-icon bi bi-house"></i>
+                  <p>${subCategory.title}</p>
+                </div>
+                <ul class="subCategory-list me-4" style="border-right: 1px solid">
+                  ${subCategory.subCategories.map(createSubCategoryHtml).join("")}
+                </ul>
+              </div>
+            `
+          )
+
+        } else {
+          // SubSubCategory :))
+        }
+
       } else {
-        
+        categoryInfos.forEach(category => {
+          insertElemToDom(
+            categoriesContainer,
+            `
+              <div class="all-categories" onclick="backToAllCategories()">
+                <p>همه اگهی ها</p>
+                <i class="bi bi-arrow-right"></i>
+              </div>
+
+              <div class="sidebar__category-link active-category" href="#">
+                <div class="sidebar__category-link_details">
+                  <i class="sidebar__category-icon bi bi-house"></i>
+                  <p>${category.title}</p>
+                </div>
+                <ul class="subCategory-list me-4" style="border-right: 1px solid">
+                  ${category.subCategories.map(createSubCategoryHtml).join("")}
+                </ul>
+              </div>
+          `
+          )
+        })
       }
-      
 
-    } else {
-
+    }
+    else {
       categories.forEach(category => {
-
         insertElemToDom(
           categoriesContainer,
           `
@@ -95,11 +158,8 @@ window.addEventListener('load', () => {
           </div>
           `
         )
-
       })
-
     }
-
 
   })
 

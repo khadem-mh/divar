@@ -32,7 +32,7 @@ window.addEventListener('load', () => {
                   <p class="product-card__link">${post.title}</p>
                 </div>
                 <div class="product-card__right-bottom">
-                  <span class="product-card__condition">${post.dynamicFields[0].data}</span>
+                  <span class="product-card__condition">${post.dynamicFields[0]?.data}</span>
                   <span class="product-card__price">
                     ${post.price === 0 ? "توافقی" : post.price.toLocaleString() + " تومان"}
                   </span>
@@ -68,6 +68,7 @@ window.addEventListener('load', () => {
 
   const cities = getCityInStorage('cities')
 
+  //! element for show in dom
   getCityAdvertisments(cities[0].id).then(res => {
 
     //Hidden Loading

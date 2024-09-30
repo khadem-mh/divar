@@ -1,61 +1,158 @@
-//? Helper Functions For Best Performance
+import { baseUrl } from "./shared.js";
 
-export const selectElem = param => document.querySelector(param)
+const saveInLocalStorage = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
 
-export const insertElemToDom = (parent, elem) => parent.insertAdjacentHTML("beforeend", elem)
+const getFromLocalStorage = (key) => {
+  return JSON.parse(localStorage.getItem(key));
+};
 
-export const setCityInStorage = (key, value) => { localStorage.setItem(key, JSON.stringify(value)) }
+const addParamToUrl = (param, value) => {
+  const url = new URL(location.href);
+  const searchParams = url.searchParams;
 
-export const getCityInStorage = key => JSON.parse(localStorage.getItem(key))
+  searchParams.set(param, value);
+  url.search = searchParams.toString();
 
-export const hiddenLoading = () => { selectElem('#loading-container').style.display = 'none' }
+  location.href = url.toString();
+};
 
-export const addParamToURL = (param, value) => {
+const getUrlParam = (param) => {
+  const urlParams = new URLSearchParams(location.search);
+  return urlParams.get(param);
+};
 
-    const url = new URL(location.href)
-    const searchParam = url.searchParams
+const removeParamFromUrl = (param) => {
+  const url = new URL(location.href);
+  url.searchParams.delete(param);
+  window.history.replaceState(null, null, url);
+  location.reload();
+};
 
-    searchParam.set(param, value)
+const calcuteRelativeTimeDifference = (createdAt) => {
+  const currentTime = new Date();
+  const createdTime = new Date(createdAt);
 
-    url.search = searchParam.toString()
-    location.href = url.toString()
+  const timeDifference = currentTime - createdTime;
+  const seconds = Math.floor(timeDifference / 1000);
 
-}
+  if (seconds < 60) {
+    return `لحظاتی پیش`;
+  } else if (seconds < 3600) {
+    const minutes = Math.floor(seconds / 60);
+    return `${minutes} دقیقه پیش`;
+  } else {
+    const hours = Math.floor(seconds / 3600);
+    if (hours < 24) {
+      return `${hours} ساعت پیش`;
+    } else {
+      const days = Math.floor(hours / 24);
+      return `${days} روز پیش`;
+    }
+  }
 
-export const getUrlParam = param => {
-    const urlParam = new URLSearchParams(location.search)
-    return urlParam.get(param)
-}
+  if (hours < 24) {
+    return `${hours} ساعت پیش`;
+  } else {
+    const days = Math.floor(hours / 24);
+    return `${days} روز پیش`;
+  }
+};
 
-export const removeParamFromUrl = param => {
-    //const url = new URL(location.href)
-    //url.searchParams.delete(param)
-    //window.history.replaceState(null, null, url)
-    history.back()
-    setTimeout(() => {
-        location.reload()
-    }, 1500)
-}
+const showModal = (id, className) => {
+  const element = document.querySelector(`#${id}`);
+  element?.classList.add(className);
+};
 
-export const calculateRelativeTimeDifference = createdAt => {
+const hideModal = (id, className) => {
+  const element = document.querySelector(`#${id}`);
+  element?.classList.remove(className);
+};
 
-    const hour = 60 * 60 * 1000 // MS
-    //date
-    const currentTime = new Date()
-    const createdTime = new Date(createdAt)
-    //calculate
-    const timeDifference = currentTime - createdTime
-    const pastHours = Math.floor(timeDifference / hour)
-    const pastDays = Math.floor(pastHours / 24)
+const showSwal = (title, icon, buttons, callback) => {
+  swal({
+    title,
+    icon,
+    buttons,
+  }).then((result) => {
+    callback(result);
+  });
+};
 
-    if (pastHours > 24) return `${pastDays} روز گذشته`
-    return `${pastHours} ساعت پیش`
+const getToken = () => {
+  const token = getFromLocalStorage("token");
+  return token;
+};
 
-}
+const isLogin = async () => {
+  const token = getToken();
 
+  if (!token) {
+    return false;
+  }
 
-//? Vars
+  const res = await fetch(`${baseUrl}/v1/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
-export const baseURLApi = "https://divarapi.liara.run/v1/"
+  return res.status === 200 ? true : false;
+};
 
-export const baseURL = "https://divarapi.liara.run/"
+const getMe = async () => {
+  const token = getToken();
+
+  if (!token) {
+    return false;
+  }
+
+  const res = await fetch(`${baseUrl}/v1/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const response = await res.json();
+
+  return response.data.user;
+};
+
+const paginateItems = (
+  href,
+  paginationContainer,
+  currentPage,
+  totalItems,
+  itemPerPage
+) => {
+  paginationContainer.innerHTML = "";
+  let paginatedCount = Math.ceil(totalItems / itemPerPage);
+
+  for (let i = 1; i < paginatedCount + 1; i++) {
+    paginationContainer.insertAdjacentHTML(
+      "beforeend",
+      `
+        <li class="${i === Number(currentPage) ? "active" : ""}">
+          <a href="${href}?page=${i}">${i}</a>
+        </li>
+      `
+    );
+  }
+};
+
+export {
+  saveInLocalStorage,
+  getFromLocalStorage,
+  addParamToUrl,
+  getUrlParam,
+  calcuteRelativeTimeDifference,
+  removeParamFromUrl,
+  showModal,
+  hideModal,
+  isLogin,
+  showSwal,
+  getToken,
+  getMe,
+  paginateItems,
+};

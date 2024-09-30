@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>مقالات</title>
-        <link rel="stylesheet" href="/public/css/adminPanel/panel.css">
+        <link rel="icon" type="image/png" sizes="32x32"
+        href="https://support-faq.divarcdn.com/web/2024/03/favicon-32x32.png" />
+        <link rel="stylesheet" href="/public/css/adminPanel/share.css">
         <link rel="stylesheet" href="/public/css/adminPanel/articles.css">
         <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.css" />
     </head>
@@ -17,43 +19,37 @@
                         <img src="/public/images/main/icon.PNG" alt>
                     </div>
                     <div>
-                        <span>09046417084</span>
+                        <span id="phone-number"></span>
                     </div>
                 </div>
 
                 <ul class="sidebar-items">
                     <li>
-                        <a href="/adminPanel/dashboard.html">
+                        <a href="/pages/adminPanel/dashboard.html">
                             <i class="bi bi-house"></i>
                             <p>داشبورد</p>
                         </a>
                     </li>
                     <li>
-                        <a href="/adminPanel/users.html">
+                        <a href="/pages/adminPanel/users.html">
                             <i class="bi bi-people"></i>
                             <p>کاربران</p>
                         </a>
                     </li>
                     <li>
-                        <a href="/adminPanel/pages/posts.html">
+                        <a href="/pages/adminPanel/posts.html">
                             <i class="bi bi-card-text"></i>
                             <p>آگهی ها</p>
                         </a>
                     </li>
                     <li>
-                        <a class="active" href="/adminPanel/articles.html">
+                        <a class="active" href="/pages/adminPanel/articles.html">
                             <i class="bi bi-card-text"></i>
                             <p>مقالات</p>
                         </a>
-                    </li>
+                    </li> 
                     <li>
-                        <a href="/adminPanel/categories.html">
-                            <i class="bi bi-tag"></i>
-                            <p>دسته بندی ها</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/adminPanel/socials.html">
+                        <a href="/pages/adminPanel/socials.html">
                             <i class="bi bi-globe"></i>
                             <p>شبکه های اجتماعی</p>
                         </a>
@@ -77,27 +73,28 @@
                                     data-bs-target="#collapseOne"
                                     aria-expanded="true"
                                     aria-controls="collapseOne">
-                                    اضافه کردن مقاله جدید 
+                                    اضافه کردن مقاله جدید
                                 </button>
                             </h2>
                             <div id="collapseOne"
-                                class="accordion-collapse collapse"
+                                class="accordion-collapse collapse show"
                                 aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <input type="text" placeholder="تیتر مقاله را وارد کنید">
+                                    <input type="text"
+                                        placeholder="تیتر مقاله را وارد کنید">
                                     <div id="editor"></div>
                                     <button class="add-article-btn">تایید</button>
                                 </div>
                             </div>
                         </div>
-                    </div> 
+                    </div>
                 </div>
                 <section>
                     <table class="table">
                         <tr>
                             <th>تیتر</th>
-                            <th>نویسنده</th> 
+                            <th>نویسنده</th>
                             <th>ویرایش</th>
                             <th>خذف</th>
                         </tr>
@@ -155,14 +152,77 @@
                             <td><button class="edit-btn">ویرایش</button></td>
                             <td><button class="delete-btn">حذف</button></td>
                         </tr>
-                      
 
+                    </table>
+                </section>
+
+                <div class="contents-title">
+                    <p>دسته بندی های مقالات</p>
+                </div>
+                <section>
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo"
+                                    aria-expanded="true"
+                                    aria-controls="collapseTwo">
+                                    اضافه کردن دسته بندی جدید
+                                </button>
+                            </h2>
+                            <div id="collapseTwo"
+                                class="accordion-collapse collapse show"
+                                aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="groups">
+                                        <div class="group">
+                                            <label for>اسم</label>
+                                            <input type="text"
+                                                placeholder="مثلا پرداخت و موارد مالی">
+                                        </div>
+                                        <div class="group">
+                                            <label for>اسم کوچک</label>
+                                            <input type="text"
+                                                placeholder="مثلا مالی">
+                                        </div>
+                                        <div class="group">
+                                            <label for>آیکون</label>
+                                            <input type="file">
+                                        </div>
+                                    </div>
+                                    <button class="add-category-btn">تایید</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="article-categories-table">
+                        <tr>
+                            <th>نام کتگوری </th>
+                            <th>آیکون کتگوری</th> 
+                            <th>تغییر اسم کتگوری</th>
+                            <th>تغییر آیکون کتگوری</th>
+                            <th>حذف کتگوری  </th>
+                             </tr>
+                        <tr>
+                            <td>کتگوری تست</td> 
+                            <td><img height="30px" src="/public/images/main/posts.png"></img></td> 
+                            <td><button class="edit-btn">ویرایش</button></td>
+                            <td>
+                                <button class="edit-btn">ویرایش</button>
+                                <input type="file" name="" id=""> 
+                            </td>  
+                            <td><button class="delete-btn">حذف</button></td>
+                        </tr>
                     </table>
                 </section>
             </div>
         </div>
-        <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
-        <script src="/public/js/adminPanel/articles.js"></script>
+        <script  src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+        <script src="/public/js/adminPanel/articles.js"  type="module"></script> 
         <script src="/vendor/bootstrap/bootstrap.js"></script>
+        <script src="/public/js/adminPanel/shared.js" type="module"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>
 </html>

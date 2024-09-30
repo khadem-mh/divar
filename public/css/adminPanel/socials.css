@@ -1,0 +1,106 @@
+
+.modal-header .btn-close {
+    font-size: 1.3rem !important;
+    margin-left: 0px !important;
+}
+
+.edit-modal.active {
+    display: block !important;
+}
+
+.edit-modal {
+    font-size: 1.5rem !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    display: none;
+    overflow-y: auto;
+    background: #0000006e;
+    padding-top: 14rem;
+    transition: opacity .15s linear;
+    outline: 0;
+}
+
+.edit-modal-content {
+    width: 500px;
+    padding: 1.5rem 2rem;
+    height: max-content;
+    background: white;
+    margin: 0 auto;
+}
+
+.edit-modal button {
+    text-align: center;
+    background: #a62626;
+    border-radius: 5px;
+    padding: .5rem 1.8rem;
+    width: max-content;
+    display: block;
+    margin: 25px auto 0;
+    color: white;
+}
+
+.edit-modal input:not(input[type=file]) {
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.288);
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.edit-modal-header .bi {
+    color: red;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.edit-modal-header {
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.363);
+    padding-bottom: .5rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    align-content: center;
+}
+
+.group input {
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.3rem;
+    width: 300px;
+    height: 39px;
+    background: white;
+}
+
+.group label {
+    color: black;
+}
+
+.group {
+    gap: 5px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.create-social-btn{
+    transition: .1s all ease-in;
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+    padding: 1rem 3rem;
+    display: block;
+    border-radius: 5px;
+    font-family: "iransans-regular";
+    cursor: pointer;
+    color: #a62626;
+    border: 1px solid #a62626;
+}
+
+.groups {
+    display: flex;
+    justify-content: space-between;
+}

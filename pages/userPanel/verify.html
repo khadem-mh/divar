@@ -5,12 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>صفحه حساب شخصی شما در سایت دیوار</title>
-    <link rel="icon" type="image/png" sizes="32x32"
-      href="https://support-faq.divarcdn.com/web/2024/03/favicon-32x32.png" />
-    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.css" />
     <link
-      rel="stylesheet"
-      href="/vendor/bootstrap_icon/bootstraicon.css" />
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://support-faq.divarcdn.com/web/2024/03/favicon-32x32.png"
+    />
+    <link rel="stylesheet" href="/vendor/bootstrap/bootstrap.css" />
+    <link rel="stylesheet" href="/vendor/bootstrap_icon/bootstraicon.css" />
     <link rel="stylesheet" href="/public/css/share.css" />
     <link rel="stylesheet" href="/public/css/userPanel/verify.css" />
   </head>
@@ -22,8 +24,11 @@
         <div class="header__wrapper">
           <div class="header__right">
             <a class="header__logo-link" href="/pages/posts.html">
-              <img class="header__logo-img" src="/public/images/header/logo.svg"
-                alt="logo">
+              <img
+                class="header__logo-img"
+                src="/public/images/header/logo.svg"
+                alt="logo"
+              />
             </a>
             <button class="header__city">
               <i class="header__city-icon bi bi-geo-alt"></i>
@@ -32,13 +37,16 @@
           </div>
           <div class="header__left">
             <div class="dropdown header_dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button"
-                data-bs-toggle="dropdown" aria-expanded="false">
+              <button
+                class="btn btn-secondary dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
                 <i class="header__left-icon bi bi-person"></i>
                 دیوار من
               </button>
               <ul class="dropdown-menu header_dropdown_menu"></ul>
-
             </div>
             <a class="header__left-link" href="/pages/support.html">
               پشتیبانی
@@ -69,7 +77,8 @@
                 <li class="sidebar__menu-item">
                   <a
                     class="sidebar__menu-link sidebar__menu-link--active"
-                    href="verify.html">
+                    href="verify.html"
+                  >
                     <i class="sidebar__menu-icon bi bi-patch-check"></i>
                     تایید هویت
                   </a>
@@ -101,7 +110,8 @@
               </ul>
               <p class="sidebar__logout sidebar__link-item" id="logout-btn">
                 <i
-                  class="sidebar__logout-icon sidebar__link-icon bi bi-box-arrow-right"></i>
+                  class="sidebar__logout-icon sidebar__link-icon bi bi-box-arrow-right"
+                ></i>
                 خروج
               </p>
               <div class="sidebar__links">
@@ -130,14 +140,17 @@
                   می‌شود. اطلاعات شناسایی شما در هیچ صفحه‌ای نمایش داده نمی‌شود.
                 </p>
                 <div class="verify__notic">
-                  <p>حساب شما در دیوار با شمارهٔ <span id="phone-number"></span>
-                    فعال است.</p>
+                  <p>
+                    حساب شما در دیوار با شمارهٔ
+                    <span id="phone-number"></span> فعال است.
+                  </p>
                 </div>
               </div>
               <div class="verify__nationality">
                 <span class="verify__nationality-title">ملیت</span>
-                <span class="verify__nationality-subtitle">ملیت خود را انتخاب
-                  کنید.</span>
+                <span class="verify__nationality-subtitle"
+                  >ملیت خود را انتخاب کنید.</span
+                >
                 <div class="verify__nationality-select">
                   <div class="verify__nationality-select-wrapper">
                     <select id>
@@ -149,20 +162,25 @@
               </div>
               <div class="verify__national-code">
                 <span class="verify__national-code-title">کد ملی</span>
-                <span class="verify__national-code-subtitle">لطفا کد ملی خود را
-                  وارد کنید.</span>
+                <span class="verify__national-code-subtitle"
+                  >لطفا کد ملی خود را وارد کنید.</span
+                >
                 <form class="verify__national-code-form" action="#">
                   <input
                     class="verify__national-input"
                     type="text"
                     id="verify-input"
-                    placeholder="مثال : 127777777" />
+                    placeholder="مثال : 127777777"
+                  />
                   <span id="verify-error" class="error">
                     کد ملی وارد شده اشتباه است
                     <i class="bi bi-x-circle"></i>
                   </span>
-                  <button class="verify__national-btn" id="verify-btn"
-                    type="button">
+                  <button
+                    class="verify__national-btn"
+                    id="verify-btn"
+                    type="button"
+                  >
                     ثبت
                   </button>
                 </form>
@@ -182,15 +200,23 @@
           <div class="city-modal__header-wrapper">
             <div class="city-modal__title-wrapper">
               <span class="city-modal__title">انتخاب شهر</span>
-              <button id="delete-all-cities"
-                class="city-modal__btn delete_cities">حذف همه</button>
+              <button
+                id="delete-all-cities"
+                class="city-modal__btn delete_cities"
+              >
+                حذف همه
+              </button>
             </div>
             <p id="city_modal_error">حداقل یک شهر را انتخاب کنید.</p>
             <div class="city-modal__selected" id="city-selected"></div>
             <div class="city-modal__searchbar">
               <form class="city-modal__form">
-                <input class="city-modal__input" id="city-modal-search-input"
-                  type="text" placeholder="جستجو در شهرها">
+                <input
+                  class="city-modal__input"
+                  id="city-modal-search-input"
+                  type="text"
+                  placeholder="جستجو در شهرها"
+                />
                 <i class="city-modal__icon bi bi-search"></i>
               </form>
             </div>
@@ -198,12 +224,15 @@
         </div>
         <div class="city-modal__cities">
           <ul class="city-modal__cities-list" id="city_modal_list"></ul>
-
         </div>
         <div class="city-modal__footer">
           <div class="city-modal__footer-wrapper">
-            <button class="city-modal__btn-footer city-modal__close">انصراف</button>
-            <button class="city-modal__btn-footer city-modal__accept ">تایید</button>
+            <button class="city-modal__btn-footer city-modal__close">
+              انصراف
+            </button>
+            <button class="city-modal__btn-footer city-modal__accept">
+              تایید
+            </button>
           </div>
         </div>
       </section>

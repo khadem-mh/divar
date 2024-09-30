@@ -38,3 +38,9 @@
     font-size: 1.5rem;
     padding: 0 1.5rem 2rem;
 }
+.empty-title{
+    text-align: center;
+    color: #a62626;
+    margin-top: 8rem;
+    font-size: 1.7rem;
+}

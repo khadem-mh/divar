@@ -4,7 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>کاربران</title>
-        <link rel="stylesheet" href="/public/css/adminPanel/panel.css"> 
+        <link rel="icon" type="image/png" sizes="32x32"
+        href="https://support-faq.divarcdn.com/web/2024/03/favicon-32x32.png" />
+        <link rel="stylesheet" href="/public/css/adminPanel/share.css"> 
     </head>
     <body>
         <div class="panel-container">
@@ -15,43 +17,37 @@
                         <img src="/public/images/main/icon.PNG" alt>
                     </div>
                     <div>
-                        <span>09046417084</span>
+                        <span id="phone-number"></span>
                     </div>
                 </div>
 
-                <ul class="sidebar-items">
+                <ul class="sidebar-items"> 
                     <li>
-                        <a href="/adminPanel/dashboard.html">
+                        <a href="/pages/adminPanel/dashboard.html">
                             <i class="bi bi-house"></i>
                             <p>داشبورد</p>
                         </a>
                     </li>
                     <li>
-                        <a class="active" href="/adminPanel/users.html">
+                        <a class="active" href="/pages/adminPanel/users.html">
                             <i class="bi bi-people"></i>
                             <p>کاربران</p>
                         </a>
                     </li>
                     <li>
-                        <a href="/adminPanel/pages/posts.html">
+                        <a href="/pages/adminPanel/posts.html">
                             <i class="bi bi-card-text"></i>
                             <p>آگهی ها</p>
                         </a>
                     </li>
                     <li>
-                        <a href="/adminPanel/articles.html">
+                        <a href="/pages/adminPanel/articles.html">
                             <i class="bi bi-card-text"></i>
                             <p>مقالات</p>
                         </a>
-                    </li>
+                    </li> 
                     <li>
-                        <a href="/adminPanel/categories.html">
-                            <i class="bi bi-tag"></i>
-                            <p>دسته بندی ها</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/adminPanel/socials.html">
+                        <a href="/pages/adminPanel/socials.html">
                             <i class="bi bi-globe"></i>
                             <p>شبکه های اجتماعی</p>
                         </a>
@@ -68,55 +64,19 @@
                 </div>
               
                 <section>
-                    <table class="table">
-                        <tr>
-                            <th>کاربر</th>
-                            <th>تعداد آگهی</th>
-                            <th>نقش</th>
-                            <th>تغییر نقش</th>
-                            <th>بن</th>
-                        </tr>
-                        <tr>
-                          <td> 09046417084</td>
-                            <td>2</td>
-                            <td>ادمین</td>
-                            <td><button class="edit-btn">ویرایش</button></td>
-                            <td><button class="delete-btn">بن</button></td>
-                        </tr>
-                        <tr>
-                          <td> 09046417084</td>
-                            <td>2</td>
-                            <td>کاربر</td>
-                            <td><button class="edit-btn">ویرایش</button></td>
-                            <td><button class="delete-btn">بن</button></td>
-                        </tr>
-                        <tr>
-                          <td> 09046417084</td>
-                            <td>2</td>
-                            <td>کاربر</td>
-                            <td><button class="edit-btn">ویرایش</button></td>
-                            <td><button class="delete-btn">بن</button></td>
-                        </tr>
-                        <tr>
-                          <td> 09046417084</td>
-                            <td>2</td>
-                            <td>کاربر</td>
-                            <td><button class="edit-btn">ویرایش</button></td>
-                            <td><button class="delete-btn">بن</button></td>
-                        </tr>
-                        <tr>
-                          <td> 09046417084</td>
-                            <td>2</td>
-                            <td>ادمین</td>
-                            <td><button class="edit-btn">ویرایش</button></td>
-                            <td><button class="delete-btn">بن</button></td>
-                        </tr>
-                        
-                        
-                    </table>
+                    <table class="table" id="users-table"></table>
+                    <ul class="pagination-items"></ul>
                 </section>
             </div>
         </div>
-       
+
+        
+        <div id="loading-container">
+            <div id="loading"></div>
+        </div>
+
+        <script src="/public/js/adminPanel/shared.js" type="module"></script>
+        <script src="/public/js/adminPanel/users.js" type="module"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </body>
 </html>
